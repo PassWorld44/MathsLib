@@ -110,7 +110,6 @@ void test_multiplication_matrice()
     }
 }
 
-/*
 void test_transposition()
 {
     Matrice m1 { 2, 3 };
@@ -159,18 +158,15 @@ void test_affichage()
     std::cout << m1 << "\n";
     std::cout << m1 + m2 << "\n";
     std::cout << m1 + m2 + m2 << "\n";
-} */
+} 
 
 int main()
 {
     test_addition();
-	std::cout << "addition test passed with success" << std::endl;
     test_multiplication_entier();
-	std::cout << "interger multiplication test passed with success" << std::endl;
     test_multiplication_matrice();
-	std::cout << "matrice multiplication test passed with success" << std::endl;
-    //test_transposition();
-    //test_affichage();
+    test_transposition();
+    test_affichage();
 
     return 0;
 }

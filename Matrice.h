@@ -18,7 +18,11 @@ public:
     
     std::size_t nb_lignes() const;
     std::size_t nb_colonnes() const;
+
+	Matrice transpose() const;
     
+	std::size_t offset(std::size_t ligne, std::size_t collone) const noexcept;
+
     int& operator()(std::size_t x, std::size_t y);
     const int operator()(std::size_t x, std::size_t y) const;
     Matrice& operator+=(const Matrice& mat);

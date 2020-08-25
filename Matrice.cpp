@@ -21,28 +21,40 @@ std::size_t Matrice::nb_colonnes() const
     return m_dimY;
 }
 
+Matrice Matrice::transpose()
+//just rotate the matrice
+{
+	Matrice res{m_dimY, m_dimX};
+	for(int i = 0; i < m_dimX; i++)
+	{
+		for(int j = 0; j < m_dimY; j++)
+		{
+			res(j, i) = operator()(i, j);
+		}
+	}
+	return res;
+}
+
+std::size_t Matrice::offset(std::size_t ligne, std::size_t collone) const noexcept
+{
+	assert(ligne < m_dimX && "La coordonée x ne peut pas dépasser la taille du tableau");
+    assert(collone < m_dimY && "La coordonée y ne peut pas dépasser la taille du tableau");
+    assert(ligne >= 0 && "La coordonée x ne peut pas être en dessous de 0");
+    assert(collone >= 0 && "La coordonée y ne peut pas être en dessous de 0");
+
+	assert(ligne * collone < m_tab.size() && "La coordonée y ne peut pas dépasser la taille du tableau");
+
+	return ligne * m_dimY + collone;
+}
+
 int& Matrice::operator()(const std::size_t x, const std::size_t y)
 {
-    assert(x < m_dimX && "La coordonée x ne peut pas dépasser la taille du tableau");
-    assert(y < m_dimY && "La coordonée y ne peut pas dépasser la taille du tableau");
-    assert(x >= 0 && "La coordonée x ne peut pas être en dessous de 0");
-    assert(y >= 0 && "La coordonée y ne peut pas être en dessous de 0");
-
-	assert(x * y < m_tab.size() && "La coordonée y ne peut pas dépasser la taille du tableau");
-
-    return m_tab.at(x * m_dimY + y);
+    return m_tab.at(offset(x, y));
 }
 
 const int Matrice::operator()(std::size_t x, std::size_t y) const
 {
-    assert(x < m_dimX && "La coordonée x ne peut pas dépasser la taille du tableau");
-    assert(y < m_dimY && "La coordonée y ne peut pas dépasser la taille du tableau");
-    assert(x >= 0 && "La coordonée x ne peut pas être en dessous de 0");
-    assert(y >= 0 && "La coordonée y ne peut pas être en dessous de 0");
-
-	assert(x * y < m_tab.size() && "La coordonée y ne peut pas dépasser la taille du tableau");
-
-    return m_tab.at(x * m_dimY + y);
+    return m_tab.at(offset(x, y));
 }
 
 Matrice& Matrice::operator+=(const Matrice& mat)
@@ -84,9 +96,9 @@ Matrice& Matrice::operator*=(const Matrice& mat)
 			int val = 0;
 			for(int k = 0; k < m_dimY; k++)
 			{
-				val += m_tab[m_dimY * i + k] * mat.m_tab[mat.m_dimY * k + j];
+				val += m_tab.at(m_dimY * i + k) * mat.m_tab.at(mat.m_dimY * k + j);
 			}
-			result.m_tab[i * m_dimX + j] = val;
+			result.m_tab.at(i * m_dimX + j) = val;
 		}
 	}
 
