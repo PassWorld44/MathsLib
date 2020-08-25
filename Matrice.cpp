@@ -1,7 +1,8 @@
 #include "Matrice.h"
 
 Matrice::Matrice(std::size_t dimX, std::size_t dimY)
-    : m_dimX{dimX}, m_dimY{dimY}, m_tab{dimX * dimY, 0}
+    : m_dimX{dimX}, m_dimY{dimY}, 
+	m_tab{static_cast<int>(dimX * dimY), 0}
 {
 	m_tab.reserve(dimX * dimY);
 	for(int i = 0; i < dimX * dimY; i++)
@@ -78,19 +79,34 @@ Matrice& Matrice::operator*=(const Matrice& mat)
 
 	for(int i = 0; i < m_dimX; i++)
 	{
-		for(int j = 0; i < mat.m_dimY; j++)
+		for(int j = 0; j< mat.m_dimY; j++)
 		{
 			int val = 0;
 			for(int k = 0; k < m_dimY; k++)
 			{
-				val += m_tab[m_dimX * i + k] * mat.m_tab[mat.m_dimX * k + j];
+				val += m_tab[m_dimY * i + k] * mat.m_tab[mat.m_dimY * k + j];
 			}
-
 			result.m_tab[i * m_dimX + j] = val;
 		}
 	}
 
+	*this = result;
+
 	return *this;
+}
+
+std::ostream& Matrice::print(std::ostream& stream)
+{
+	for(int i = 0; i < m_dimX; i++)
+	{
+		for(int j = 0; j < m_dimY; j++)
+		{
+			stream << operator()(i, j) << ' ';
+		}
+		stream << std::endl;
+	}
+
+	return stream;
 }
 
 Matrice operator+(Matrice lhs, const Matrice& rhs)
@@ -112,4 +128,9 @@ Matrice operator*(int lhs, Matrice rhs)
 Matrice operator*(Matrice lhs, const Matrice& rhs)
 {
 	return lhs *= rhs;
+}
+
+std::ostream& operator<<(std::ostream& stream, Matrice mat)
+{
+	return mat.print(stream);
 }

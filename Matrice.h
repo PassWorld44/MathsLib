@@ -24,9 +24,11 @@ public:
     Matrice& operator+=(const Matrice& mat);
 	Matrice& operator*=(int scal);
 	Matrice& operator*=(const Matrice& mat);
+	std::ostream& print(std::ostream& stream);
 };
 
 Matrice operator+(Matrice lhs, const Matrice& rhs);
 Matrice operator*(Matrice lhs, int rhs);
 Matrice operator*(int lhs, Matrice rhs);
 Matrice operator*(Matrice lhs, const Matrice& rhs);
+std::ostream& operator<<(std::ostream& stream, Matrice mat);

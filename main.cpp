@@ -164,8 +164,11 @@ void test_affichage()
 int main()
 {
     test_addition();
+	std::cout << "addition test passed with success" << std::endl;
     test_multiplication_entier();
+	std::cout << "interger multiplication test passed with success" << std::endl;
     test_multiplication_matrice();
+	std::cout << "matrice multiplication test passed with success" << std::endl;
     //test_transposition();
     //test_affichage();
 
