@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <cassert>
 #include <iostream>
@@ -18,6 +20,8 @@ public:
     
     std::size_t nb_lignes() const;
     std::size_t nb_colonnes() const;
+	Matrice ligne(std::size_t index_ligne) const;
+	Matrice colonne(std::size_t index_colonne) const;
 
 	Matrice transpose() const;
     

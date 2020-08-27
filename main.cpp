@@ -1,4 +1,6 @@
 #include "Matrice.h"
+#include "bigint.h"
+
 #include <iostream>
 #include <cassert>
 
@@ -167,6 +169,10 @@ int main()
     test_multiplication_matrice();
     test_transposition();
     test_affichage();
+
+	BigInt a{"76363972467382678083949835435643475"};
+
+	std::cout << a.to_int() << std::endl;
 
     return 0;
 }

@@ -21,7 +21,27 @@ std::size_t Matrice::nb_colonnes() const
     return m_dimY;
 }
 
-Matrice Matrice::transpose()
+Matrice Matrice::colonne(std::size_t index_colonne) const
+{
+	Matrice mat(m_dimX, 1);
+	for(int i = 0; i < m_dimX; i++)
+	{
+		mat(i, 0) = operator()(i, index_colonne);
+	}
+	return mat;
+}
+
+Matrice Matrice::ligne(std::size_t index_ligne) const
+{
+	Matrice mat(1, m_dimY);
+	for(int i = 0; i < m_dimY; i++)
+	{
+		mat(0, i) = operator()(index_ligne, i);
+	}
+	return mat;
+}
+
+Matrice Matrice::transpose() const
 //just rotate the matrice
 {
 	Matrice res{m_dimY, m_dimX};
