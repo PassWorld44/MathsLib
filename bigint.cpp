@@ -32,22 +32,19 @@ void BigInt::init(std::string baseExplained)
 			break;
 		}
 	}
-
+	int i = 0;
 	for(char carac : baseExplained)
 	{
-		
+		auto r = m_baseDetails.emplace(carac, i);
+		if(!r.second)
+		{
+			throw std::runtime_error("there can't be two of the same caracters into the same base");
+		}
+		i++;
 	}
 }
-/*
+
 int BigInt::to_int() const //TODO a refaire
 {
-	try
-	{
-		return std::stoi(m_nbr, nullptr, m_base);
-	}
-	catch(std::out_of_range exept)
-	{
-		return std::numeric_limits<int>.max();
-	}
+	
 }
-*/
