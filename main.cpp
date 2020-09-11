@@ -164,15 +164,16 @@ void test_affichage()
 
 int main()
 {
-    test_addition();
+    /*test_addition();
     test_multiplication_entier();
     test_multiplication_matrice();
     test_transposition();
-    test_affichage();
+    test_affichage(); */
+	BigInt a { 420 };
+    BigInt b { "48879554321858363547485554545557454555445" };
 
-	BigInt a{"76363972467382678083949835435643475"};
-
-	std::cout << a.to_int() << std::endl;
+    // Doit afficher 48879554321858363547485554545557454555865.
+    std::cout << a + b << std::endl;
 
     return 0;
 }
