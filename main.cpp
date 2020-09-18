@@ -162,18 +162,24 @@ void test_affichage()
     std::cout << m1 + m2 + m2 << "\n";
 } 
 
+void test_addition_BigInt()
+{
+	BigInt a { 420 };
+    BigInt b { "48879554321858363547485554545557454555445" };
+	std::string result {"48879554321858363547485554545557454555865"};
+    assert(result.compare((b + a).getString()) == 0 && "l'addition de deux BigInt ne donne pas la valeur attendue");
+}
+
 int main()
 {
-    /*test_addition();
+    test_addition();
     test_multiplication_entier();
     test_multiplication_matrice();
     test_transposition();
-    test_affichage(); */
-	BigInt a { 420 };
-    BigInt b { "48879554321858363547485554545557454555445" };
+    //test_affichage(); 
+	
+	test_addition_BigInt();
 
-    // Doit afficher 48879554321858363547485554545557454555865.
-    std::cout << a + b << std::endl;
-
+	
     return 0;
 }

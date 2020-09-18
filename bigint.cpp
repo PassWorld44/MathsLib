@@ -57,7 +57,7 @@ BigInt& BigInt::operator+=(const BigInt other)
 
 	int retenue = 0;
 
-	while(itO != other.m_nbr.crend() && itS != m_nbr.crend())
+	while(itO != other.m_nbr.crend() && itS != m_nbr.rend())
 	{
 		int nbr = other.m_baseDetails.at(*itO) +m_baseDetails.at(*itS) + retenue;
 
@@ -69,6 +69,23 @@ BigInt& BigInt::operator+=(const BigInt other)
 		itO++;
 		itS++;
 	};
+
+	if(itO == other.m_nbr.crend() && itS == m_nbr.rend())
+	{
+		return *this;
+	}
+	else if(itO == other.m_nbr.crend()) //we reach the end 
+	//of the other string but not the this.m_string
+	{
+		std::string result {itS, m_nbr.rend()};
+		reverse(result.begin(), result.end());
+		//we initiate it with a reverse iterator
+		reverse(m_nbr.rbegin(), itS);
+		//the actual m_nbr is trash so i can save the reversed thing that are already computed
+		result.append(m_nbr.rbegin(), itS);
+
+		m_nbr = result;
+	}
 
 	return *this;
 }
@@ -97,7 +114,19 @@ int BigInt::to_int() const //TODO a refaire
 	return nbr;
 }
 
-std::string getString() const
+std::string BigInt::getString() const
 {
-	retrun m_nbr;
+	return m_nbr;
+}
+
+BigInt operator+(BigInt a, const BigInt&  b)
+{
+	a += b;
+	return a;
+}
+
+std::ostream& operator<<(std::ostream& sortie, BigInt a)
+{
+	sortie << a.getString();
+	return sortie;
 }

@@ -33,3 +33,7 @@ private:
 	int m_base;
 	std::map<char, int> m_baseDetails;
 };
+
+BigInt operator+(BigInt a, const BigInt& b);
+
+std::ostream& operator<<(std::ostream& sortie, BigInt a);
